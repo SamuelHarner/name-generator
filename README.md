@@ -7,5 +7,5 @@ Model should be trained on a dataset that is a list of names containing only eng
 Run in terminal using command in the following format:
 
 ```
-python name_generator.py < ./datasets/biotech_companies.txt
+python name_generator.py < ../datasets/biotech_companies.txt
 ```

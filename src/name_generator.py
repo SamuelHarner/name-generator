@@ -1,6 +1,8 @@
 import sys
 import numpy as np
 
+NUM_CHARS = 27
+
 char_2_int = {
     'a': 0,
     'b': 1,
@@ -62,9 +64,9 @@ int_2_char = {
 ## MAIN ##
 def main():
     data = read_data()
-    first_ltrs = compute_first_ltr_probs(data)
-    transitions = compute_transition_probs(data)
-    print(generate_name(first_ltrs, transitions))
+    names = generate_filtered_names(data=data, amount=5)
+    for i, name in enumerate(names):
+        print(f"{i+1}) {name}")
 
 # Return array of names from input (input should only contain names with english letters)
 def read_data():
@@ -72,7 +74,7 @@ def read_data():
     return [name.lower().rstrip() + "  " for name in names]
 
 def compute_first_ltr_probs(data):
-    first_ltrs = np.zeros(27)
+    first_ltrs = np.zeros(NUM_CHARS)
 
     # count occurences of letters as first letter
     for name in data:
@@ -88,7 +90,7 @@ def compute_first_ltr_probs(data):
 
 def compute_transition_probs(data):
     # transtions[0][1] is prob of next ltr being 'b' ('b' has idx 1) if prev ltr was 'a' (idx 0)
-    transitions = np.zeros((27,27))
+    transitions = np.zeros((NUM_CHARS, NUM_CHARS))
     
     # count num of transitions between letter pairings
     for name in data:
@@ -143,7 +145,29 @@ def generate_name(first_ltrs, transitions):
 
         curr_name_pos += 1
     
-    return name
+    return name.rstrip()
+
+def generate_filtered_names(data, amount):
+    first_ltrs = compute_first_ltr_probs(data)
+    transitions = compute_transition_probs(data)
+
+    longest_name_len = 0
+    for name in data:
+        name_len = len(name.rstrip())
+        if name_len > longest_name_len:
+            longest_name_len = name_len
+
+    names_generated = []
+    names_accepted = 0
+    while names_accepted < amount:
+        name = generate_name(first_ltrs, transitions)
+        name_len = len(name)
+
+        if name_len > 2 and name_len <= longest_name_len:
+            names_generated.append(name)
+            names_accepted += 1
+    
+    return names_generated
 
 ## ENTRY ##
 if __name__ == "__main__":

@@ -4,6 +4,8 @@ Name generation using simple probablistic model (first order Markov model) for n
 Model should be trained on a dataset that is a list of names containing only english letters (no spaces).
 
 ## How to run
+**Library requirement:** NumPy
+
 Run in terminal using command in the following format:
 
 ```

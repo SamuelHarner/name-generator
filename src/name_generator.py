@@ -65,8 +65,8 @@ int_2_char = {
 def main():
     data = read_data()
     names = generate_filtered_names(data=data, amount=5)
-    for i, name in enumerate(names):
-        print(f"{i+1}) {name}")
+    for name in names:
+        print(name)
 
 # Return array of names from input (input should only contain names with english letters)
 def read_data():

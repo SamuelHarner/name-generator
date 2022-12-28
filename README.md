@@ -11,3 +11,22 @@ Run in terminal using command in the following format:
 ```
 python name_generator.py < ../datasets/biotech_companies.txt
 ```
+
+## Example outputs
+### Biotech companies dataset
+```
+Geriviote
+Ata
+Allerin
+Ironat
+Geletrel
+```
+
+### Countries dataset
+```
+Trugu
+Atoka
+Caol
+Ianmimey
+Conora
+```
